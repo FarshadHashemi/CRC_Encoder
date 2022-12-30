@@ -1,40 +1,38 @@
 Library IEEE ;
-Use IEEE.STD_LOGIC_1164.All ;
-Library UNISIM ;
-Use UNISIM.VCOMPONENTS.All ;
+Use IEEE.STD_Logic_1164.All ;
 
 Entity CRC Is
 	
 	Generic(
-		Polynomial	:	STD_LOGIC_VECTOR(32 downto 0)	:=	"000000000000000000000000111010101" ;
-		CRC_N			:	INTEGER 								:=	8		
+		Polynomial	:	STD_Logic_Vector(32 Downto 0)	:=	"000000000000000000000000111010101" ;
+		CRC_N			:	Integer 								:=	8		
 	) ;
 	
 	Port( 
-		Clock					:	IN		STD_LOGIC ;
-		Clock_Enable		:	IN		STD_LOGIC ;
-		Synchronous_Reset	:	IN		STD_LOGIC ;
-		Input_Data			:	IN		STD_LOGIC ;
-		Valid_Input_Data	:	IN		STD_LOGIC ;
-		Output_Data			:	OUT	STD_LOGIC_VECTOR(CRC_N-1 Downto 0) ;
-		Valid_Output_Data	:	OUT	STD_LOGIC
+		Clock					:	In		STD_Logic ;
+		Clock_Enable		:	In		STD_Logic ;
+		Synchronous_Reset	:	In		STD_Logic ;
+		Input_Data			:	In		STD_Logic ;
+		Valid_Input_Data	:	In		STD_Logic ;
+		Output_Data			:	Out	STD_Logic_Vector(CRC_N-1 Downto 0) ;
+		Valid_Output_Data	:	Out	STD_Logic
 	) ;
 	
 End CRC;
 
 Architecture Behavioral Of CRC Is
 	
-	Signal	Clock_Enable_Register			:	STD_LOGIC									:= '0' ;
-	Signal	Synchronous_Reset_Register		:	STD_LOGIC									:= '0' ;
-	Signal	Input_Data_Register				:	STD_LOGIC									:= '0' ;
-	Signal	Valid_Input_Data_Register		:	STD_LOGIC									:= '0' ;
+	Signal	Clock_Enable_Register			:	STD_Logic									:= '0' ;
+	Signal	Synchronous_Reset_Register		:	STD_Logic									:= '0' ;
+	Signal	Input_Data_Register				:	STD_Logic									:= '0' ;
+	Signal	Valid_Input_Data_Register		:	STD_Logic									:= '0' ;
 --	Valid_Input_Data_Register_1_Clock_Delay
-	Signal	Valid_Input_Data_Register_1CD	:	STD_LOGIC									:= '0' ;
+	Signal	Valid_Input_Data_Register_1CD	:	STD_Logic									:= '0' ;
 -- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Signal	Output_Data_Register				:	STD_LOGIC_VECTOR(CRC_N-1 Downto 0) 	:=	(Others=>'0') ;
-	Signal	Valid_Output_Data_Register		:	STD_LOGIC									:= '0' ;
+	Signal	Output_Data_Register				:	STD_Logic_Vector(CRC_N-1 Downto 0) 	:=	(Others=>'0') ;
+	Signal	Valid_Output_Data_Register		:	STD_Logic									:= '0' ;
 
-	Constant	Generator							:	STD_LOGIC_VECTOR(CRC_N-1 Downto 0)	:= Polynomial(CRC_N-1 Downto 0) ;
+	Constant	Generator							:	STD_Logic_Vector(CRC_N-1 Downto 0)	:= Polynomial(CRC_N-1 Downto 0) ;
 	
 	Signal	CRC_Code								:	STD_LOGIC_VECTOR(CRC_N-1 Downto 0)	:= (Others=>'0') ;
 	
